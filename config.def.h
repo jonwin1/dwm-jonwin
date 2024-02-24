@@ -6,6 +6,8 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const double activeopacity   = 1.0f;     /* Window opacity when it's focused (0 <= opacity <= 1) */
+static const double inactiveopacity = 0.7f;     /* Window opacity when it's inactive (0 <= opacity <= 1) */
 static const char *fonts[]          = { "monospace:size=16" };
 static const char dmenufont[]       = "monospace:size=16";
 static const char col_gray1[]       = "#222222";
@@ -27,11 +29,11 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class        instance    title           tags mask   isfloating  isterminal  noswallow   monitor */
-	{ "Gimp",       NULL,       NULL,           0,          0,          0,          0,          -1 },
-	{ "Firefox",    NULL,       NULL,           0,          0,          0,          0,          -1 },
-	{ "st",         NULL,       NULL,           0,          0,          1,          0,          -1 },
-	{ NULL,         NULL,       "Event Tester", 0,          0,          0,          1,          -1 }, /* xev */
+	/* class instance title tags-mask isfloating isterminal noswallow focusopacity unfocusopacity monitor */
+	{ "Gimp",       NULL,   NULL,           0,  0,  0,  0,  activeopacity,  inactiveopacity,    -1 },
+	{ "Firefox-esr",NULL,   NULL,           0,  0,  0,  0,  activeopacity,  inactiveopacity,    -1 },
+	{ "st",         NULL,   NULL,           0,  0,  1,  0,  0.9,            inactiveopacity,    -1 },
+	{ NULL,         NULL,   "Event Tester", 0,  0,  0,  1,  1.0,            1.0,                -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -65,41 +67,45 @@ static const char *termcmd[]  = { "st", NULL };
 
 #include "exitdwm.c"
 static const Key keys[] = {
-    /* modifier                     key         function        argument */
-	{ MODKEY,                       XK_b,       togglebar,      {0} },
-	{ MODKEY,                       XK_d,       incnmaster,     {.i = -1 } },
-    { MODKEY,                       XK_f,       spawn,          SHCMD ("firefox") },
-	{ MODKEY|ShiftMask,             XK_f,       setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_h,       setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_i,       incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_j,       focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,       focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_l,       setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_m,       setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_p,       spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_q,       killclient,     {0} },
-	{ MODKEY|ShiftMask,             XK_q,       exitdwm,        {0} },
-    { MODKEY|ShiftMask,             XK_t,       setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_Return,  zoom,           {0} },
-	{ MODKEY|ShiftMask,             XK_Return,  spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_Tab,     view,           {0} },
-	{ MODKEY,                       XK_space,   setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,   togglefloating, {0} },
-	{ MODKEY,                       XK_0,       view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,       tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,   focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period,  focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,   tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period,  tagmon,         {.i = +1 } },
-	TAGKEYS(                        XK_1,                       0)
-	TAGKEYS(                        XK_2,                       1)
-	TAGKEYS(                        XK_3,                       2)
-	TAGKEYS(                        XK_4,                       3)
-	TAGKEYS(                        XK_5,                       4)
-	TAGKEYS(                        XK_6,                       5)
-	TAGKEYS(                        XK_7,                       6)
-	TAGKEYS(                        XK_8,                       7)
-	TAGKEYS(                        XK_9,                       8)
+    /* modifier                     key         function            argument */
+    { MODKEY|ShiftMask,             XK_a,       changefocusopacity, {.f = +0.025}},
+	{ MODKEY,                       XK_b,       togglebar,          {0} },
+	{ MODKEY,                       XK_d,       incnmaster,         {.i = -1 } },
+    { MODKEY,                       XK_f,       spawn,              SHCMD ("firefox") },
+	{ MODKEY|ShiftMask,             XK_f,       setlayout,          {.v = &layouts[1]} },
+	{ MODKEY,                       XK_h,       setmfact,           {.f = -0.05} },
+	{ MODKEY,                       XK_i,       incnmaster,         {.i = +1 } },
+	{ MODKEY,                       XK_j,       focusstack,         {.i = +1 } },
+	{ MODKEY,                       XK_k,       focusstack,         {.i = -1 } },
+	{ MODKEY,                       XK_l,       setmfact,           {.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_m,       setlayout,          {.v = &layouts[2]} },
+	{ MODKEY,                       XK_p,       spawn,              {.v = dmenucmd } },
+	{ MODKEY,                       XK_q,       killclient,         {0} },
+	{ MODKEY|ShiftMask,             XK_q,       exitdwm,            {0} },
+    { MODKEY|ShiftMask,             XK_s,       changefocusopacity, {.f = -0.025}},
+    { MODKEY|ShiftMask,             XK_t,       setlayout,          {.v = &layouts[0]} },
+    { MODKEY|ShiftMask,             XK_x,       changeunfocusopacity,{.f = -0.025}},
+	{ MODKEY|ShiftMask,             XK_z,       changeunfocusopacity,{.f = +0.025}},
+	{ MODKEY,                       XK_Return,  zoom,               {0} },
+	{ MODKEY|ShiftMask,             XK_Return,  spawn,              {.v = termcmd } },
+	{ MODKEY,                       XK_Tab,     view,               {0} },
+	{ MODKEY,                       XK_space,   setlayout,          {0} },
+	{ MODKEY|ShiftMask,             XK_space,   togglefloating,     {0} },
+	{ MODKEY,                       XK_0,       view,               {.ui = ~0 } },
+	{ MODKEY|ShiftMask,             XK_0,       tag,                {.ui = ~0 } },
+	{ MODKEY,                       XK_comma,   focusmon,           {.i = -1 } },
+	{ MODKEY,                       XK_period,  focusmon,           {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_comma,   tagmon,             {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_period,  tagmon,             {.i = +1 } },
+	TAGKEYS(                        XK_1,                           0)
+	TAGKEYS(                        XK_2,                           1)
+	TAGKEYS(                        XK_3,                           2)
+	TAGKEYS(                        XK_4,                           3)
+	TAGKEYS(                        XK_5,                           4)
+	TAGKEYS(                        XK_6,                           5)
+	TAGKEYS(                        XK_7,                           6)
+	TAGKEYS(                        XK_8,                           7)
+	TAGKEYS(                        XK_9,                           8)
 };
 
 /* button definitions */
