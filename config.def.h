@@ -6,6 +6,7 @@ static const unsigned int snap          = 32;       /* snap pixel */
 static const int swallowfloating        = 0;        /* 1 means swallow floating windows by default */
 static int showbar                      = 0;        /* 0 means no bar */
 static int topbar                       = 1;        /* 0 means bottom bar */
+static char centerfirst[]               = "1";
 static char font[]                      = "monospace:size=10" ;
 static char dmenufont[]                 = "monospace:size=10";
 static const char *fonts[]              = { font };
@@ -38,11 +39,11 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class            instance    title           tags-mask   isfloating  isterminal  noswallow   focusopacity    unfocusopacity      !center monitor */
-	{ "Gimp",           NULL,       NULL,           0,          0,          0,          0,          activeopacity,  inactiveopacity,    1       -1 },
-	{ "Firefox-esr",    NULL,       NULL,           0,          0,          0,          0,          activeopacity,  inactiveopacity,    0       -1 },
-	{ "st",             NULL,       NULL,           0,          0,          1,          0,          0.9,            inactiveopacity,    0       -1 },
-	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          1.0,            1.0,                0       -1 }, /* xev */
+	/* class            instance    title           tags-mask   isfloating  isterminal  noswallow   focusopacity    unfocusopacity      centerfirst     monitor */
+	{ "Gimp",           NULL,       NULL,           0,          0,          0,          0,          activeopacity,  inactiveopacity,    0,              -1 },
+	{ "Firefox-esr",    NULL,       NULL,           0,          0,          0,          0,          activeopacity,  inactiveopacity,    centerfirst,    -1 },
+	{ "st",             NULL,       NULL,           0,          0,          1,          0,          0.9,            inactiveopacity,    centerfirst,    -1 },
+	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          1.0,            1.0,                0,              -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -54,7 +55,7 @@ static const int lockfullscreen = 0; /* 1 will force focus on the fullscreen win
 static int defaultlayout = 0;
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
+	{ "[]=",      tile },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 	{ "|M|",      centeredmaster },
@@ -94,6 +95,7 @@ ResourcePref resources[] = {
     { "nmaster",          	INTEGER,    &nmaster },
     { "mfact",      	 	FLOAT,      &mfact },
     { "defaultlayout",      INTEGER,    &defaultlayout },
+    { "centerfirst",        STRING,    &centerfirst },
 };
 
 #include "exitdwm.c"

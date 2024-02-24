@@ -154,7 +154,7 @@ typedef struct {
 	int noswallow;
 	double opacity;
     double unfocusopacity;
-    int CenterThisWindow;
+    char *CenterThisWindow;
 	int monitor;
 } Rule;
 
@@ -357,7 +357,7 @@ applyrules(Client *c)
 			c->isterminal = r->isterminal;
 			c->noswallow  = r->noswallow;
 			c->isfloating = r->isfloating;
-            c->CenterThisWindow = r->CenterThisWindow;
+            c->CenterThisWindow = atoi(r->CenterThisWindow);
 			c->tags |= r->tags;
 			c->opacity = r->opacity;
 			c->unfocusopacity = r->unfocusopacity;
