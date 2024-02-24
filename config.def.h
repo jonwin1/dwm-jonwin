@@ -56,6 +56,7 @@ static int nmaster     = 1;    /* number of clients in master area */
 static int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 0; /* 1 will force focus on the fullscreen window */
 
+static int defaultlayout = 0;
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
@@ -97,6 +98,7 @@ ResourcePref resources[] = {
     { "topbar",          	INTEGER,    &topbar },
     { "nmaster",          	INTEGER,    &nmaster },
     { "mfact",      	 	FLOAT,      &mfact },
+    { "defaultlayout",      INTEGER,    &defaultlayout },
 };
 
 #include "exitdwm.c"
