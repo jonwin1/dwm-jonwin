@@ -61,6 +61,8 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
 };
 
 /* key definitions */
@@ -111,11 +113,13 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_k,       focusstack,             {.i = -1 } },
 	{ MODKEY,                       XK_l,       setmfact,               {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_m,       setlayout,              {.v = &layouts[2]} },
+	{ MODKEY,                       XK_o,       setlayout,              {.v = &layouts[4]} },
 	{ MODKEY,                       XK_p,       spawn,                  {.v = dmenucmd } },
 	{ MODKEY,                       XK_q,       killclient,             {0} },
 	{ MODKEY|ShiftMask,             XK_q,       exitdwm,                {0} },
     { MODKEY|ShiftMask,             XK_s,       changefocusopacity,     {.f = -0.025}},
     { MODKEY|ShiftMask,             XK_t,       setlayout,              {.v = &layouts[0]} },
+	{ MODKEY,                       XK_u,       setlayout,              {.v = &layouts[3]} },
     { MODKEY|ShiftMask,             XK_x,       changeunfocusopacity,   {.f = -0.025}},
 	{ MODKEY|ShiftMask,             XK_z,       changeunfocusopacity,   {.f = +0.025}},
 	{ MODKEY,                       XK_Return,  zoom,                   {0} },
