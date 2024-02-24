@@ -100,7 +100,7 @@ struct Client {
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
 	int bw, oldbw;
 	unsigned int tags;
-	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow;
+	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow, CenterThisWindow;
 	pid_t pid;
 	Client *next;
 	Client *snext;
@@ -154,6 +154,7 @@ typedef struct {
 	int noswallow;
 	double opacity;
     double unfocusopacity;
+    int CenterThisWindow;
 	int monitor;
 } Rule;
 
@@ -339,6 +340,7 @@ applyrules(Client *c)
 
 	/* rule matching */
 	c->isfloating = 0;
+    c->CenterThisWindow = 0;
 	c->tags = 0;
 	c->opacity = activeopacity;
 	c->unfocusopacity = inactiveopacity;
@@ -355,6 +357,7 @@ applyrules(Client *c)
 			c->isterminal = r->isterminal;
 			c->noswallow  = r->noswallow;
 			c->isfloating = r->isfloating;
+            c->CenterThisWindow = r->CenterThisWindow;
 			c->tags |= r->tags;
 			c->opacity = r->opacity;
 			c->unfocusopacity = r->unfocusopacity;
@@ -1876,6 +1879,13 @@ tile(Monitor *m)
 			if (ty + HEIGHT(c) < m->wh)
 				ty += HEIGHT(c);
 		}
+
+    if (n == 1 && selmon->sel->CenterThisWindow)
+        resizeclient(selmon->sel,
+                     (selmon->mw - selmon->mw * 0.5) / 2,
+                     (selmon->mh - selmon->mh * 0.95) / 2,
+                     selmon->mw * 0.5,
+                     selmon->mh * 0.95);
 }
 
 void
@@ -2628,6 +2638,13 @@ centeredmaster(Monitor *m)
 			oty += HEIGHT(c);
 		}
 	}
+
+    if (n == 1 && selmon->sel->CenterThisWindow)
+        resizeclient(selmon->sel,
+                     (selmon->mw - selmon->mw * 0.5) / 2,
+                     (selmon->mh - selmon->mh * 0.95) / 2,
+                     selmon->mw * 0.5,
+                     selmon->mh * 0.95);
 }
 
 void
