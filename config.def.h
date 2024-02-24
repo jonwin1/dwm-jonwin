@@ -1,30 +1,30 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static unsigned int borderpx        = 1;        /* border pixel of windows */
-static unsigned int snap            = 32;       /* snap pixel */
-static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
-static int showbar                  = 0;        /* 0 means no bar */
-static int topbar                   = 1;        /* 0 means bottom bar */
-static const double activeopacity   = 1.0f;     /* Window opacity when it's focused (0 <= opacity <= 1) */
-static const double inactiveopacity = 0.7f;     /* Window opacity when it's inactive (0 <= opacity <= 1) */
-static char font[]                  = "monospace:size=10" ;
-static char dmenufont[]             = "monospace:size=10";
-static const char *fonts[]          = { font };
-static const unsigned int baralpha  =   0xb4;
-static const unsigned int borderalpha = 0xb4;
-static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
-static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#005577";
-static char selbgcolor[]            = "#005577";
+static const unsigned int borderpx      = 1;        /* border pixel of windows */
+static const unsigned int snap          = 32;       /* snap pixel */
+static const int swallowfloating        = 0;        /* 1 means swallow floating windows by default */
+static int showbar                      = 0;        /* 0 means no bar */
+static int topbar                       = 1;        /* 0 means bottom bar */
+static char font[]                      = "monospace:size=10" ;
+static char dmenufont[]                 = "monospace:size=10";
+static const char *fonts[]              = { font };
+static const unsigned int baralpha      = 0xb4;
+static const unsigned int borderalpha   = 0xb4;
+static const double activeopacity       = 1.0f;     /* Window opacity when it's focused (0 <= opacity <= 1) */
+static const double inactiveopacity     = 0.8f;     /* Window opacity when it's inactive (0 <= opacity <= 1) */
+static char normbgcolor[]               = "#222222";
+static char normbordercolor[]           = "#444444";
+static char normfgcolor[]               = "#bbbbbb";
+static char selfgcolor[]                = "#eeeeee";
+static char selbordercolor[]            = "#005577";
+static char selbgcolor[]                = "#005577";
 static char *colors[][3] = {
-       /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+    /*               fg           bg           border   */
+    [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+    [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
-static const unsigned int alphas[][3]      = {
+static const unsigned int alphas[][3] = {
     /*               fg      bg        border*/
     [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
 	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
@@ -78,21 +78,18 @@ static const char *termcmd[]  = { "st", NULL };
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-		{ "font",               STRING,     &font },
-		{ "font",               STRING,     &dmenufont },
-		{ "background",         STRING,     &normbgcolor },
-		{ "background",         STRING,     &normbordercolor },
-		{ "foreground",         STRING,     &normfgcolor },
-		{ "color1",             STRING,     &selbgcolor },
-		{ "color1",             STRING,     &selbordercolor },
-		{ "foreground",         STRING,     &selfgcolor },
-		{ "borderpx",          	INTEGER,    &borderpx },
-		{ "snap",          		INTEGER,    &snap },
-		{ "showbar",          	INTEGER,    &showbar },
-		{ "topbar",          	INTEGER,    &topbar },
-		{ "nmaster",          	INTEGER,    &nmaster },
-		{ "resizehints",       	INTEGER,    &resizehints },
-		{ "mfact",      	 	FLOAT,      &mfact },
+	{ "font",               STRING,     &font },
+    { "font",               STRING,     &dmenufont },
+    { "background",         STRING,     &normbgcolor },
+    { "background",         STRING,     &normbordercolor },
+    { "foreground",         STRING,     &normfgcolor },
+    { "color1",             STRING,     &selbgcolor },
+    { "color1",             STRING,     &selbordercolor },
+    { "foreground",         STRING,     &selfgcolor },
+    { "showbar",          	INTEGER,    &showbar },
+    { "topbar",          	INTEGER,    &topbar },
+    { "nmaster",          	INTEGER,    &nmaster },
+    { "mfact",      	 	FLOAT,      &mfact },
 };
 
 #include "exitdwm.c"
