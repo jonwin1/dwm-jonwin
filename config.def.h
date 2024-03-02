@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx      = 1;        /* border pixel of windows */
+static unsigned int borderpx            = 1;        /* border pixel of windows */
 static const unsigned int snap          = 32;       /* snap pixel */
 static const int swallowfloating        = 0;        /* 1 means swallow floating windows by default */
 static int showbar                      = 0;        /* 0 means no bar */
@@ -90,6 +90,7 @@ ResourcePref resources[] = {
     { "color1",             STRING,     &selbgcolor },
     { "color1",             STRING,     &selbordercolor },
     { "foreground",         STRING,     &selfgcolor },
+    { "borderpx",           INTEGER,    &borderpx },
     { "showbar",          	INTEGER,    &showbar },
     { "topbar",          	INTEGER,    &topbar },
     { "nmaster",          	INTEGER,    &nmaster },
