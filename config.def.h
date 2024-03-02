@@ -100,6 +100,7 @@ ResourcePref resources[] = {
 };
 
 #include "exitdwm.c"
+#include "movestack.c"
 static const Key keys[] = {
     /* modifier                     key         function                argument */
     { MODKEY|ShiftMask,             XK_a,       changefocusopacity,     {.f = +0.025}},
@@ -110,7 +111,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_h,       setmfact,               {.f = -0.05} },
 	{ MODKEY,                       XK_i,       incnmaster,             {.i = +1 } },
 	{ MODKEY,                       XK_j,       focusstack,             {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_j,       movestack,              {.i = +1 } },
 	{ MODKEY,                       XK_k,       focusstack,             {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_k,       movestack,              {.i = -1 } },
 	{ MODKEY,                       XK_l,       setmfact,               {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_m,       setlayout,              {.v = &layouts[2]} },
 	{ MODKEY,                       XK_o,       setlayout,              {.v = &layouts[4]} },
