@@ -7,6 +7,7 @@ static const int swallowfloating        = 0;        /* 1 means swallow floating 
 static int showbar                      = 0;        /* 0 means no bar */
 static int topbar                       = 1;        /* 0 means bottom bar */
 static char centerfirst[]               = "1";
+static const Bool viewontag             = True;     /* Switch view on tag switch */
 static char font[]                      = "monospace:size=10" ;
 static char dmenufont[]                 = "monospace:size=10";
 static const char *fonts[]              = { font };
