@@ -41,9 +41,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class            instance    title           tags-mask   isfloating  isterminal  noswallow   focusopacity    unfocusopacity      centerfirst     monitor */
-	{ "Gimp",           NULL,       NULL,           0,          0,          0,          0,          activeopacity,  inactiveopacity,    0,              -1 },
 	{ "Firefox-esr",    NULL,       NULL,           0,          0,          0,          0,          activeopacity,  inactiveopacity,    centerfirst,    -1 },
-	{ "st",             NULL,       NULL,           0,          0,          1,          0,          0.9,            inactiveopacity,    centerfirst,    -1 },
+	{ "St",             NULL,       NULL,           0,          0,          1,          0,          0.9,            inactiveopacity,    centerfirst,    -1 },
 	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          1.0,            1.0,                0,              -1 }, /* xev */
 };
 
