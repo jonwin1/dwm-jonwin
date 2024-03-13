@@ -51,6 +51,7 @@ static const Layout layouts[] = {
 	{ "><>",      NULL },
 	{ "[M]",      monocle },
 	{ ">M>",      centeredfloatingmaster },
+	{ NULL,       NULL },
 };
 
 /* key definitions */
@@ -75,6 +76,7 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
+    NULL
 };
 
 #include "exitdwm.c"
@@ -84,7 +86,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_b,       togglebar,              {0} },
 	{ MODKEY,                       XK_d,       incnmaster,             {.i = -1 } },
     { MODKEY,                       XK_f,       spawn,                  SHCMD ("firefox") },
-	{ MODKEY|ShiftMask,             XK_f,       setlayout,              {.v = &layouts[1]} },
 	{ MODKEY,                       XK_h,       setmfact,               {.f = -0.05} },
 	{ MODKEY,                       XK_i,       incnmaster,             {.i = +1 } },
 	{ MODKEY,                       XK_j,       focusstack,             {.i = +1 } },
@@ -92,14 +93,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_k,       focusstack,             {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_k,       movestack,              {.i = -1 } },
 	{ MODKEY,                       XK_l,       setmfact,               {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_m,       setlayout,              {.v = &layouts[2]} },
-	{ MODKEY,                       XK_o,       setlayout,              {.v = &layouts[4]} },
 	{ MODKEY,                       XK_p,       spawn,                  {.v = dmenucmd } },
 	{ MODKEY,                       XK_q,       killclient,             {0} },
 	{ MODKEY|ShiftMask,             XK_q,       exitdwm,                {0} },
 	{ MODKEY,                       XK_s,       togglescratch,          {.v = scratchpadcmd } },
-    { MODKEY|ShiftMask,             XK_t,       setlayout,              {.v = &layouts[0]} },
-	{ MODKEY,                       XK_u,       setlayout,              {.v = &layouts[3]} },
 	{ MODKEY,                       XK_Return,  zoom,                   {0} },
 	{ MODKEY|ShiftMask,             XK_Return,  spawn,                  {.v = termcmd } },
 	{ MODKEY,                       XK_Tab,     view,                   {0} },
@@ -111,6 +108,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period,  focusmon,               {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,   tagmon,                 {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period,  tagmon,                 {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_comma,   cyclelayout,            {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_period,  cyclelayout,            {.i = +1 } },
 	TAGKEYS(                        XK_1,                               0)
 	TAGKEYS(                        XK_2,                               1)
 	TAGKEYS(                        XK_3,                               2)
