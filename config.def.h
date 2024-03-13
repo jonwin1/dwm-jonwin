@@ -11,8 +11,6 @@ static const Bool viewontag             = True;     /* Switch view on tag switch
 static char font[]                      = "monospace:size=10" ;
 static char dmenufont[]                 = "monospace:size=10";
 static const char *fonts[]              = { font };
-static const double activeopacity       = 1.0f;     /* Window opacity when it's focused (0 <= opacity <= 1) */
-static const double inactiveopacity     = 1.0f;     /* Window opacity when it's inactive (0 <= opacity <= 1) */
 static char normbgcolor[]               = "#222222";
 static char normbordercolor[]           = "#444444";
 static char normfgcolor[]               = "#bbbbbb";
@@ -33,10 +31,10 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class            instance    title           tags-mask   isfloating  isterminal  noswallow   focusopacity    unfocusopacity      centerfirst     monitor */
-	{ "Firefox-esr",    NULL,       NULL,           0,          0,          0,          0,          activeopacity,  inactiveopacity,    centerfirst,    -1 },
-	{ "St",             NULL,       NULL,           0,          0,          1,          0,          1.0,            inactiveopacity,    centerfirst,    -1 },
-	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          1.0,            1.0,                0,              -1 }, /* xev */
+	/* class            instance    title           tags-mask   isfloating  isterminal  noswallow   centerfirst     monitor */
+	{ "Firefox-esr",    NULL,       NULL,           0,          0,          0,          0,          centerfirst,    -1 },
+	{ "St",             NULL,       NULL,           0,          0,          1,          0,          centerfirst,    -1 },
+	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          0,              -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -98,7 +96,6 @@ ResourcePref resources[] = {
 #include "movestack.c"
 static const Key keys[] = {
     /* modifier                     key         function                argument */
-    { MODKEY|ShiftMask,             XK_a,       changefocusopacity,     {.f = +0.025}},
 	{ MODKEY,                       XK_b,       togglebar,              {0} },
 	{ MODKEY,                       XK_d,       incnmaster,             {.i = -1 } },
     { MODKEY,                       XK_f,       spawn,                  SHCMD ("firefox") },
@@ -116,11 +113,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_q,       killclient,             {0} },
 	{ MODKEY|ShiftMask,             XK_q,       exitdwm,                {0} },
 	{ MODKEY,                       XK_s,       togglescratch,          {.v = scratchpadcmd } },
-    { MODKEY|ShiftMask,             XK_s,       changefocusopacity,     {.f = -0.025}},
     { MODKEY|ShiftMask,             XK_t,       setlayout,              {.v = &layouts[0]} },
 	{ MODKEY,                       XK_u,       setlayout,              {.v = &layouts[3]} },
-    { MODKEY|ShiftMask,             XK_x,       changeunfocusopacity,   {.f = -0.025}},
-	{ MODKEY|ShiftMask,             XK_z,       changeunfocusopacity,   {.f = +0.025}},
 	{ MODKEY,                       XK_Return,  zoom,                   {0} },
 	{ MODKEY|ShiftMask,             XK_Return,  spawn,                  {.v = termcmd } },
 	{ MODKEY,                       XK_Tab,     view,                   {0} },
