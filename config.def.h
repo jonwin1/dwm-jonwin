@@ -8,8 +8,8 @@ static int showbar                      = 1;        /* 0 means no bar */
 static int topbar                       = 1;        /* 0 means bottom bar */
 static char centerfirst[]               = "1";
 static const Bool viewontag             = True;     /* Switch view on tag switch */
-static char font[]                      = "monospace:size=10" ;
-static char dmenufont[]                 = "monospace:size=10";
+static char font[]                      = "Fira Code:size=12" ;
+static char dmenufont[]                 = "Fira Code:size=12";
 static const char *fonts[]              = { font };
 static char normbgcolor[]               = "#222222";
 static char normbordercolor[]           = "#444444";
@@ -33,7 +33,7 @@ static const Rule rules[] = {
 	 */
 	/* class            instance    title           tags-mask   isfloating  isterminal  noswallow   centerfirst     monitor */
 	{ "Firefox-esr",    NULL,       NULL,           0,          0,          0,          0,          centerfirst,    -1 },
-	{ "St",             NULL,       NULL,           0,          0,          1,          0,          centerfirst,    -1 },
+	{ "st-256color",    NULL,       NULL,           0,          0,          1,          0,          centerfirst,    -1 },
 	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          0,              -1 }, /* xev */
 };
 
@@ -75,21 +75,6 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-	{ "font",               STRING,     &font },
-    { "font",               STRING,     &dmenufont },
-    { "background",         STRING,     &normbgcolor },
-    { "background",         STRING,     &normbordercolor },
-    { "foreground",         STRING,     &normfgcolor },
-    { "color1",             STRING,     &selbgcolor },
-    { "color1",             STRING,     &selbordercolor },
-    { "foreground",         STRING,     &selfgcolor },
-    { "borderpx",           INTEGER,    &borderpx },
-    { "showbar",          	INTEGER,    &showbar },
-    { "topbar",          	INTEGER,    &topbar },
-    { "nmaster",          	INTEGER,    &nmaster },
-    { "mfact",      	 	FLOAT,      &mfact },
-    { "defaultlayout",      INTEGER,    &defaultlayout },
-    { "centerfirst",        STRING,    &centerfirst },
 };
 
 #include "exitdwm.c"
