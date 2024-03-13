@@ -11,10 +11,8 @@ static const Bool viewontag             = True;     /* Switch view on tag switch
 static char font[]                      = "monospace:size=10" ;
 static char dmenufont[]                 = "monospace:size=10";
 static const char *fonts[]              = { font };
-static const unsigned int baralpha      = 0xb4;
-static const unsigned int borderalpha   = 0xb4;
 static const double activeopacity       = 1.0f;     /* Window opacity when it's focused (0 <= opacity <= 1) */
-static const double inactiveopacity     = 0.8f;     /* Window opacity when it's inactive (0 <= opacity <= 1) */
+static const double inactiveopacity     = 1.0f;     /* Window opacity when it's inactive (0 <= opacity <= 1) */
 static char normbgcolor[]               = "#222222";
 static char normbordercolor[]           = "#444444";
 static char normfgcolor[]               = "#bbbbbb";
@@ -25,11 +23,6 @@ static char *colors[][3] = {
     /*               fg           bg           border   */
     [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
     [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
-};
-static const unsigned int alphas[][3] = {
-    /*               fg      bg        border*/
-    [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */
@@ -42,7 +35,7 @@ static const Rule rules[] = {
 	 */
 	/* class            instance    title           tags-mask   isfloating  isterminal  noswallow   focusopacity    unfocusopacity      centerfirst     monitor */
 	{ "Firefox-esr",    NULL,       NULL,           0,          0,          0,          0,          activeopacity,  inactiveopacity,    centerfirst,    -1 },
-	{ "St",             NULL,       NULL,           0,          0,          1,          0,          0.9,            inactiveopacity,    centerfirst,    -1 },
+	{ "St",             NULL,       NULL,           0,          0,          1,          0,          1.0,            inactiveopacity,    centerfirst,    -1 },
 	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          1.0,            1.0,                0,              -1 }, /* xev */
 };
 
