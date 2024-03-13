@@ -1,10 +1,10 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static unsigned int borderpx            = 1;        /* border pixel of windows */
+static unsigned int borderpx            = 2;        /* border pixel of windows */
 static const unsigned int snap          = 32;       /* snap pixel */
 static const int swallowfloating        = 0;        /* 1 means swallow floating windows by default */
-static int showbar                      = 0;        /* 0 means no bar */
+static int showbar                      = 1;        /* 0 means no bar */
 static int topbar                       = 1;        /* 0 means bottom bar */
 static char centerfirst[]               = "1";
 static const Bool viewontag             = True;     /* Switch view on tag switch */
@@ -38,7 +38,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
+static float mfact     = 0.333; /* factor of master area size [0.05..0.95] */
 static int nmaster     = 1;    /* number of clients in master area */
 static int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -46,10 +46,10 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 static int defaultlayout = 0;
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
 	{ "|M|",      centeredmaster },
+	{ "[]=",      tile },
+	{ "><>",      NULL },
+	{ "[M]",      monocle },
 	{ ">M>",      centeredfloatingmaster },
 };
 
