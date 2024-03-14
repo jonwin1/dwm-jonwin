@@ -72,6 +72,18 @@ static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
+#include <X11/XF86keysym.h>
+
+/* If you use pipewire add somewhere in your constants definition section. Use "wpctl status" to
+   find out the real sink ID, 0 is a placeholder here. */
+static const char *upvol[]      = { "/usr/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%+",	  "--limit", "1", NULL };
+static const char *downvol[]    = { "/usr/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%-",	  NULL };
+static const char *mutevol[]    = { "/usr/bin/wpctl",	"set-mute",	"@DEFAULT_AUDIO_SINK@",	"toggle", NULL };
+
+/* To use light add this to the constant definition section. Thanks Hritik14. */
+static const char *light_up[]   = { "/usr/bin/light",   "-A", "5", NULL };
+static const char *light_down[] = { "/usr/bin/light",   "-U", "5", NULL };
+
 /*
  * Xresources preferences to load at startup
  */
@@ -110,6 +122,11 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period,  tagmon,                 {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_comma,   cyclelayout,            {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period,  cyclelayout,            {.i = +1 } },
+    { 0,                            XF86XK_AudioLowerVolume,    spawn,  {.v = downvol } },
+    { 0,                            XF86XK_AudioMute,           spawn,  {.v = mutevol } },
+    { 0,                            XF86XK_AudioRaiseVolume,    spawn,  {.v = upvol   } },
+    { 0,                            XF86XK_MonBrightnessUp,     spawn,  {.v = light_up} },
+    { 0,                            XF86XK_MonBrightnessDown,   spawn,  {.v = light_down} },
 	TAGKEYS(                        XK_1,                               0)
 	TAGKEYS(                        XK_2,                               1)
 	TAGKEYS(                        XK_3,                               2)
