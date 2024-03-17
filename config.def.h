@@ -13,6 +13,11 @@ static const char *colors[][3] = {
     [SchemeNorm] = { "#bbbbbb", "#222222", "#444444" },
     [SchemeSel]  = { "#eeeeee", "#005577", "#005577" },
 };
+static const unsigned int alphas[][3]      = {
+    /*               fg      bg        border*/
+    [SchemeNorm] = { OPAQUE, 0xd0, OPAQUE },
+	[SchemeSel]  = { OPAQUE, 0xd0, OPAQUE },
+};
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
