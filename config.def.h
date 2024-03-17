@@ -10,13 +10,15 @@ static const Bool viewontag         = True;     /* Switch view on tag switch */
 static const char *fonts[]          = { "Fira Code:size=12" };
 static const char *colors[][3] = {
     /*               fg         bg         border   */
-    [SchemeNorm] = { "#bbbbbb", "#222222", "#444444" },
-    [SchemeSel]  = { "#eeeeee", "#005577", "#005577" },
+/*    [SchemeNorm] = { "#bbbbbb", "#222222", "#444444" }, */
+/*    [SchemeSel]  = { "#eeeeee", "#005577", "#005577" }, */
+    [SchemeNorm] = { "#d4be98", "#1d2021", "#1d2021" },
+    [SchemeSel]  = { "#1d2021", "#d4be98", "#d4be98" },
 };
 static const unsigned int alphas[][3]      = {
-    /*               fg      bg        border*/
+    /*               fg      bg    border*/
     [SchemeNorm] = { OPAQUE, 0x80, OPAQUE },
-	[SchemeSel]  = { OPAQUE, 0x80, OPAQUE },
+	[SchemeSel]  = { OPAQUE, OPAQUE, OPAQUE },
 };
 
 /* tagging */
