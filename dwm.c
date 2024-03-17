@@ -1938,6 +1938,13 @@ tilewide(Monitor *m)
 			if (ty + HEIGHT(c) < m->wh)
 				ty += HEIGHT(c);
 		}
+
+    if (n == 1 && selmon->sel->CenterThisWindow)
+        resizeclient(selmon->sel,
+                     (selmon->mw - selmon->mw * 0.5) / 2,
+                     (selmon->mh - selmon->mh * 0.95) / 2,
+                     selmon->mw * 0.5,
+                     selmon->mh * 0.95);
 }
 
 void
