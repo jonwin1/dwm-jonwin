@@ -1,26 +1,17 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static unsigned int borderpx            = 2;        /* border pixel of windows */
-static const unsigned int snap          = 32;       /* snap pixel */
-static const int swallowfloating        = 0;        /* 1 means swallow floating windows by default */
-static int showbar                      = 1;        /* 0 means no bar */
-static int topbar                       = 1;        /* 0 means bottom bar */
-static char centerfirst[]               = "1";
-static const Bool viewontag             = True;     /* Switch view on tag switch */
-static char font[]                      = "Fira Code:size=12" ;
-static char dmenufont[]                 = "Fira Code:size=12";
-static const char *fonts[]              = { font };
-static char normbgcolor[]               = "#222222";
-static char normbordercolor[]           = "#444444";
-static char normfgcolor[]               = "#bbbbbb";
-static char selfgcolor[]                = "#eeeeee";
-static char selbordercolor[]            = "#005577";
-static char selbgcolor[]                = "#005577";
-static char *colors[][3] = {
-    /*               fg           bg           border   */
-    [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-    [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int snap      = 32;       /* snap pixel */
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
+static const int showbar            = 1;        /* 0 means no bar */
+static const int topbar             = 1;        /* 0 means bottom bar */
+static const Bool viewontag         = True;     /* Switch view on tag switch */
+static const char *fonts[]          = { "Fira Code:size=12" };
+static const char *colors[][3] = {
+    /*               fg         bg         border   */
+    [SchemeNorm] = { "#bbbbbb", "#222222", "#444444" },
+    [SchemeSel]  = { "#eeeeee", "#005577", "#005577" },
 };
 
 /* tagging */
@@ -31,26 +22,23 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class            instance    title           tags-mask   isfloating  isterminal  noswallow   centerfirst     monitor */
-	{ "Firefox-esr",    NULL,       NULL,           0,          0,          0,          0,          centerfirst,    -1 },
-	{ "st-256color",    NULL,       NULL,           0,          0,          1,          0,          centerfirst,    -1 },
-	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          0,              -1 }, /* xev */
+	/* class            instance    title           tags-mask   isfloating  isterminal  noswallow   centerfirst monitor */
+	{ "Firefox-esr",    NULL,       NULL,           0,          0,          0,          0,          1,          -1 },
+	{ "st-256color",    NULL,       NULL,           0,          0,          1,          0,          1,          -1 },
+	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          0,          -1 }, /* xev */
 };
 
-/* layout(s) */
-static float mfact     = 0.333; /* factor of master area size [0.05..0.95] */
-static int nmaster     = 1;    /* number of clients in master area */
-static int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
-static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+static const float mfact        = 0.333;    /* factor of master area size [0.05..0.95] */
+static const int nmaster        = 1;        /* number of clients in master area */
+static const int resizehints    = 0;        /* 1 means respect size hints in tiled resizals */
+static const int lockfullscreen = 1;        /* 1 will force focus on the fullscreen window */
 
-static int defaultlayout = 0;
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "|M|",      centeredmaster },
 	{ "[]=",      tile },
 	{ "><>",      NULL },
 	{ "[M]",      monocle },
-	{ ">M>",      centeredfloatingmaster },
 	{ NULL,       NULL },
 };
 
@@ -67,29 +55,17 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 #include <X11/XF86keysym.h>
-
-/* If you use pipewire add somewhere in your constants definition section. Use "wpctl status" to
-   find out the real sink ID, 0 is a placeholder here. */
 static const char *upvol[]      = { "/usr/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%+",	  "--limit", "1", NULL };
 static const char *downvol[]    = { "/usr/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%-",	  NULL };
 static const char *mutevol[]    = { "/usr/bin/wpctl",	"set-mute",	"@DEFAULT_AUDIO_SINK@",	"toggle", NULL };
-
-/* To use light add this to the constant definition section. Thanks Hritik14. */
 static const char *light_up[]   = { "/usr/bin/light",   "-A", "5", NULL };
 static const char *light_down[] = { "/usr/bin/light",   "-U", "5", NULL };
-
-/*
- * Xresources preferences to load at startup
- */
-ResourcePref resources[] = {
-    NULL
-};
 
 #include "exitdwm.c"
 #include "movestack.c"
