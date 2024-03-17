@@ -15,8 +15,8 @@ static const char *colors[][3] = {
 };
 static const unsigned int alphas[][3]      = {
     /*               fg      bg        border*/
-    [SchemeNorm] = { OPAQUE, 0xd0, OPAQUE },
-	[SchemeSel]  = { OPAQUE, 0xd0, OPAQUE },
+    [SchemeNorm] = { OPAQUE, 0x80, OPAQUE },
+	[SchemeSel]  = { OPAQUE, 0x80, OPAQUE },
 };
 
 /* tagging */
@@ -33,7 +33,7 @@ static const Rule rules[] = {
 	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          0,          -1 }, /* xev */
 };
 
-static const float mfact        = 0.666;    /* factor of master area size [0.05..0.95] */
+static const float mfact        = 0.667;    /* factor of master area size [0.05..0.95] */
 static const int nmaster        = 2;        /* number of clients in master area */
 static const int resizehints    = 0;        /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1;        /* 1 will force focus on the fullscreen window */
