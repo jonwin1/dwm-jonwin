@@ -64,7 +64,6 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
-static const char *dmenudesktopcmd[] = { "dmenu_run_desktop", "-m", dmenumon, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
@@ -90,8 +89,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_k,       focusstack,             {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_k,       movestack,              {.i = -1 } },
 	{ MODKEY,                       XK_l,       setmfact,               {.f = +0.05} },
-	{ MODKEY,                       XK_p,       spawn,                  {.v = dmenudesktopcmd } },
-	{ MODKEY|ShiftMask,             XK_p,       spawn,                  {.v = dmenucmd } },
+	{ MODKEY,                       XK_p,       spawn,                  {.v = dmenucmd } },
 	{ MODKEY,                       XK_q,       killclient,             {0} },
 	{ MODKEY|ShiftMask,             XK_q,       exitdwm,                {0} },
 	{ MODKEY,                       XK_s,       togglescratch,          {.v = scratchpadcmd } },
