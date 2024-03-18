@@ -7,6 +7,7 @@ void exitdwm ()
 	defined S_LOCK				|| \
 	defined S_RESTART_DWM		|| \
 	defined S_OFFSCREEN			|| \
+    defined S_ONSCREEN          || \
 	defined S_EXIT				|| \
 	defined S_REBOOT			|| \
 	defined S_SHUTDOWN			|| \
@@ -17,6 +18,7 @@ void exitdwm ()
 # define S_LOCK "Lock"
 # define S_RESTART_DWM "Restart-Dwm"
 # define S_OFFSCREEN "Off-screen"
+# define S_ONSCREEN "On-screen"
 # define S_EXIT "Exit"
 # define S_REBOOT "Reboot"
 # define S_SHUTDOWN "Shutdown"
@@ -28,6 +30,7 @@ void exitdwm ()
 			S_FORMAT (LOCK) "\n"
 			S_FORMAT (RESTART_DWM) "\n"
 			S_FORMAT (OFFSCREEN) "\n"
+            S_FORMAT (ONSCREEN) "\n"
 			S_FORMAT (EXIT) "\n"
 			S_FORMAT (REBOOT) "\n"
 			S_FORMAT (SHUTDOWN)
@@ -46,11 +49,10 @@ void exitdwm ()
 		goto close_streams;
 	}
 
-    fprintf(stderr, "Selected action: %s\n", exit_action);
-
 	if (strcmp (exit_action, S_LOCK) == 0) system ("slock");
 	else if (strcmp (exit_action, S_RESTART_DWM) == 0) quit (& (const Arg) {1});
 	else if (strcmp (exit_action, S_OFFSCREEN) == 0) system ("sleep .5; xset dpms force off");
+    else if (strcmp (exit_action, S_ONSCREEN) == 0) system ("xset -dpms");
 	else if (strcmp (exit_action, S_EXIT) == 0) quit (& (const Arg) {0});
 	else if (strcmp (exit_action, S_REBOOT) == 0) system ("systemctl reboot");
 	else if (strcmp (exit_action, S_SHUTDOWN) == 0) system ("systemctl poweroff -i");
