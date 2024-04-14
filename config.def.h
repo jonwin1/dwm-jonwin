@@ -30,7 +30,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class            instance    title           tags-mask   isfloating  isterminal  noswallow   centerfirst monitor */
-	{ "Firefox-esr",    NULL,       NULL,           0,          0,          0,          0,          1,          -1 },
+	{ "Firefox",        NULL,       NULL,           0,          0,          0,          0,          1,          -1 },
 	{ "st-256color",    NULL,       NULL,           0,          0,          1,          0,          1,          -1 },
 	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          0,          -1 }, /* xev */
 };
@@ -69,11 +69,11 @@ static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 #include <X11/XF86keysym.h>
-static const char *upvol[]      = { "/usr/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%+",	  "--limit", "1", NULL };
-static const char *downvol[]    = { "/usr/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%-",	  NULL };
-static const char *mutevol[]    = { "/usr/bin/wpctl",	"set-mute",	"@DEFAULT_AUDIO_SINK@",	"toggle", NULL };
-static const char *light_up[]   = { "/usr/bin/light",   "-A", "5", NULL };
-static const char *light_down[] = { "/usr/bin/light",   "-U", "5", NULL };
+static const char *upvol[]      = { "/run/current-system/sw/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%+",	  "--limit", "1", NULL };
+static const char *downvol[]    = { "/run/current-system/sw/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%-",	  NULL };
+static const char *mutevol[]    = { "/run/current-system/sw/bin/wpctl",	"set-mute",	"@DEFAULT_AUDIO_SINK@",	"toggle", NULL };
+static const char *light_up[]   = { "/run/current-system/sw/bin/light",   "-A", "5", NULL };
+static const char *light_down[] = { "/run/current-system/sw/bin/light",   "-U", "5", NULL };
 
 #include "exitdwm.c"
 #include "movestack.c"
