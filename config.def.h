@@ -7,18 +7,16 @@ static const int swallowfloating    = 0;        /* 1 means swallow floating wind
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const Bool viewontag         = True;     /* Switch view on tag switch */
-static const char *fonts[]          = { "Fira Code:size=12" };
+static const char *fonts[]          = { "FiraCode Nerd Font:size=12" };
 static const char *colors[][3] = {
     /*               fg         bg         border   */
-/*    [SchemeNorm] = { "#bbbbbb", "#222222", "#444444" }, */
-/*    [SchemeSel]  = { "#eeeeee", "#005577", "#005577" }, */
-    [SchemeNorm] = { "#d4be98", "#1d2021", "#1d2021" },
-    [SchemeSel]  = { "#1d2021", "#d4be98", "#d4be98" },
+    [SchemeNorm] = { "#d8dee9", "#2e3440", "#2e3440" },
+    [SchemeSel]  = { "#eceff4", "#4c566a", "#88c0d0" },
 };
 static const unsigned int alphas[][3]      = {
     /*               fg      bg    border*/
     [SchemeNorm] = { OPAQUE, 0x80, OPAQUE },
-	[SchemeSel]  = { OPAQUE, OPAQUE, OPAQUE },
+	[SchemeSel]  = { OPAQUE, 0x80, OPAQUE },
 };
 
 /* tagging */
@@ -31,7 +29,8 @@ static const Rule rules[] = {
 	 */
 	/* class            instance    title           tags-mask   isfloating  isterminal  noswallow   centerfirst monitor */
 	{ "Firefox",        NULL,       NULL,           0,          0,          0,          0,          1,          -1 },
-	{ "st-256color",    NULL,       NULL,           0,          0,          1,          0,          1,          -1 },
+    { "firefox",        NULL,       NULL,           0,          0,          0,          0,          1,          -1 },
+    { "st",             NULL,       NULL,           0,          0,          1,          0,          1,          -1 },
 	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          0,          -1 }, /* xev */
 };
 
