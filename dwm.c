@@ -2047,28 +2047,33 @@ tile(Monitor *m)
 void
 tilewide(Monitor *m)
 {
-        unsigned int i, n, w, h, mw, mx, ty;
+  unsigned int i, n, w, h, r, oe = enablegaps, ie = enablegaps, mw, mx, ty;
 	Client *c;
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
 	if (n == 0)
 		return;
 
+  if (smartgaps == n) {
+    oe = 0; // outer gaps disabled
+    enableoutergaps = 0;
+  } else enableoutergaps = 1;
+
 	if (n > m->nmaster)
-		mw = m->nmaster ? m->ww * m->mfact : 0;
+		mw = m->nmaster ? (m->ww + m->gappiv*ie) * m->mfact : 0;
 	else
-		mw = m->ww;
-	for (i = mx = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+		mw = m->ww - 2*m->gappov*oe + m->gappiv*ie;
+	for (i = 0, mx = ty = m->gappoh*oe, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
-		        w = (mw - mx) / (MIN(n, m->nmaster) - i);
-		        resize(c, m->wx + mx, m->wy, w - (2*c->bw), (m->wh - ty) - (2*c->bw), 0);
+		        w = (mw - mx - m->gappov*oe - m->gappiv*ie * (r-1)) / r;
+		        resize(c, m->wx + mx, m->wy + m->gappoh*oe, w - (2*c->bw), (m->wh - ty) - (2*c->bw) - m->gappih*ie, 0);
 		        if  (mx + WIDTH(c) < m->ww)
-		                mx += WIDTH(c);
+		                mx += WIDTH(c) + m->gappiv*ie;
 		} else {
-			h = (m->wh - ty) / (n - i);
-			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
+			h = (m->wh - ty - m->gappoh*oe - m->gappih*ie * (r-1)) / r;
+			resize(c, m->wx + mw + m->gappov*oe, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappov*oe, h - (2*c->bw), 0);
 			if (ty + HEIGHT(c) < m->wh)
-				ty += HEIGHT(c);
+				ty += HEIGHT(c) + m->gappih*ie;
 		}
 
     if (n == 1 && selmon->sel->CenterThisWindow)
