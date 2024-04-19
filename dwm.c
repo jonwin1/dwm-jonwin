@@ -2037,11 +2037,11 @@ tile(Monitor *m)
 		}
 
     if (n == 1 && selmon->sel->CenterThisWindow)
-        resizeclient(selmon->sel,
-                     (selmon->mw - selmon->mw * 0.5) / 2,
-                     (selmon->mh - selmon->mh * 0.95) / 2,
-                     selmon->mw * 0.5,
-                     selmon->mh * 0.95);
+      resizeclient(selmon->sel,
+        (selmon->mw - selmon->mw * 0.5) / 2,
+        (selmon->mh - selmon->mh * 0.95) / 2,
+        selmon->mw * 0.5,
+        selmon->mh * 0.95);
 }
 
 void
@@ -2065,11 +2065,12 @@ tilewide(Monitor *m)
 		mw = m->ww - 2*m->gappov*oe + m->gappiv*ie;
 	for (i = 0, mx = m->gappov*oe, ty = m->gappoh*oe, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
-		        w = (mw - mx - m->gappov*oe - m->gappiv*ie * (r-1)) / r;
-		        resize(c, m->wx + mx, m->wy + m->gappoh*oe, w - (2*c->bw), (m->wh - ty) - (2*c->bw) - m->gappih*ie, 0);
-		        if  (mx + WIDTH(c) < m->ww)
-		                mx += WIDTH(c) + m->gappiv*ie;
+      w = (mw - mx - m->gappov*oe - m->gappiv*ie * (r-1)) / r;
+      resize(c, m->wx + mx, m->wy + m->gappoh*oe, w - (2*c->bw), (m->wh - ty) - (2*c->bw) - m->gappih*ie, 0);
+      if  (mx + WIDTH(c) < m->ww)
+        mx += WIDTH(c) + m->gappiv*ie;
 		} else {
+      r = n - i;
 			h = (m->wh - ty - m->gappoh*oe - m->gappih*ie * (r-1)) / r;
 			resize(c, m->wx + mw + m->gappov*oe, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappov*oe, h - (2*c->bw), 0);
 			if (ty + HEIGHT(c) < m->wh)
@@ -2077,11 +2078,11 @@ tilewide(Monitor *m)
 		}
 
     if (n == 1 && selmon->sel->CenterThisWindow)
-        resizeclient(selmon->sel,
-                     (selmon->mw - selmon->mw * 0.5) / 2,
-                     (selmon->mh - selmon->mh * 0.95) / 2,
-                     selmon->mw * 0.5,
-                     selmon->mh * 0.95);
+      resizeclient(selmon->sel,
+        (selmon->mw - selmon->mw * 0.5) / 2,
+        (selmon->mh - selmon->mh * 0.95) / 2,
+        selmon->mw * 0.5,
+        selmon->mh * 0.95);
 }
 
 void
