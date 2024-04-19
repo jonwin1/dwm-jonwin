@@ -68,11 +68,11 @@ static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 #include <X11/XF86keysym.h>
-static const char *upvol[]      = { "/run/current-system/sw/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%+",	  "--limit", "1", NULL };
-static const char *downvol[]    = { "/run/current-system/sw/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%-",	  NULL };
-static const char *mutevol[]    = { "/run/current-system/sw/bin/wpctl",	"set-mute",	"@DEFAULT_AUDIO_SINK@",	"toggle", NULL };
-static const char *light_up[]   = { "/run/current-system/sw/bin/light",   "-A", "5", NULL };
-static const char *light_down[] = { "/run/current-system/sw/bin/light",   "-U", "5", NULL };
+static const char *upvol[]      = { "wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%+",	  "--limit", "1", NULL };
+static const char *downvol[]    = { "wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%-",	  NULL };
+static const char *mutevol[]    = { "wpctl",	"set-mute",	"@DEFAULT_AUDIO_SINK@",	"toggle", NULL };
+static const char *light_up[]   = { "light",   "-A", "5", NULL };
+static const char *light_down[] = { "light",   "-U", "5", NULL };
 
 #include "exitdwm.c"
 #include "movestack.c"
