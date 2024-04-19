@@ -2063,7 +2063,7 @@ tilewide(Monitor *m)
 		mw = m->nmaster ? (m->ww + m->gappiv*ie) * m->mfact : 0;
 	else
 		mw = m->ww - 2*m->gappov*oe + m->gappiv*ie;
-	for (i = 0, mx = ty = m->gappoh*oe, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+	for (i = 0, mx = m->gappov*oe, ty = m->gappoh*oe, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
 		        w = (mw - mx - m->gappov*oe - m->gappiv*ie * (r-1)) / r;
 		        resize(c, m->wx + mx, m->wy + m->gappoh*oe, w - (2*c->bw), (m->wh - ty) - (2*c->bw) - m->gappih*ie, 0);
