@@ -3,6 +3,12 @@
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int cornerrad = 4;
+static const unsigned int gappih    = 25;
+static const unsigned int gappiv    = 25;
+static const unsigned int gappoh    = 25;
+static const unsigned int gappov    = 25;
+static const int smartgaps          = 1;
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -16,7 +22,7 @@ static const char *colors[][3] = {
 static const unsigned int alphas[][3]      = {
     /*               fg      bg    border*/
     [SchemeNorm] = { OPAQUE, 0x80, OPAQUE },
-	[SchemeSel]  = { OPAQUE, 0x80, OPAQUE },
+    [SchemeSel]  = { OPAQUE, 0x80, OPAQUE },
 };
 
 /* tagging */
@@ -28,10 +34,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class            instance    title           tags-mask   isfloating  isterminal  noswallow   centerfirst monitor */
-	{ "Firefox",        NULL,       NULL,           0,          0,          0,          0,          1,          -1 },
-    { "firefox",        NULL,       NULL,           0,          0,          0,          0,          1,          -1 },
-    { "st",             NULL,       NULL,           0,          0,          1,          0,          1,          -1 },
-	{ NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          0,          -1 }, /* xev */
+  { "Firefox",        NULL,       NULL,           0,          0,          0,          0,          1,          -1 },
+  { "firefox",        NULL,       NULL,           0,          0,          0,          0,          1,          -1 },
+  { "st",             NULL,       NULL,           0,          0,          1,          0,          1,          -1 },
+  { NULL,             NULL,       "Event Tester", 0,          0,          0,          1,          0,          -1 }, /* xev */
 };
 
 static const float mfact        = 0.667;    /* factor of master area size [0.05..0.95] */
@@ -77,10 +83,11 @@ static const char *light_down[] = { "/run/current-system/sw/bin/light",   "-U", 
 #include "exitdwm.c"
 #include "movestack.c"
 static const Key keys[] = {
-    /* modifier                     key         function                argument */
+  /* modifier                     key         function                argument */
 	{ MODKEY,                       XK_b,       togglebar,              {0} },
 	{ MODKEY,                       XK_d,       incnmaster,             {.i = -1 } },
-    { MODKEY,                       XK_f,       spawn,                  SHCMD ("firefox") },
+  { MODKEY,                       XK_f,       spawn,                  SHCMD ("firefox") },
+  { MODKEY|ShiftMask,             XK_g,       togglegaps,             {0} },
 	{ MODKEY,                       XK_h,       setmfact,               {.f = -0.05} },
 	{ MODKEY,                       XK_i,       incnmaster,             {.i = +1 } },
 	{ MODKEY,                       XK_j,       focusstack,             {.i = +1 } },
@@ -105,11 +112,11 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period,  tagmon,                 {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_comma,   cyclelayout,            {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period,  cyclelayout,            {.i = +1 } },
-    { 0,                            XF86XK_AudioLowerVolume,    spawn,  {.v = downvol } },
-    { 0,                            XF86XK_AudioMute,           spawn,  {.v = mutevol } },
-    { 0,                            XF86XK_AudioRaiseVolume,    spawn,  {.v = upvol   } },
-    { 0,                            XF86XK_MonBrightnessUp,     spawn,  {.v = light_up} },
-    { 0,                            XF86XK_MonBrightnessDown,   spawn,  {.v = light_down} },
+  { 0,                            XF86XK_AudioLowerVolume,    spawn,  {.v = downvol } },
+  { 0,                            XF86XK_AudioMute,           spawn,  {.v = mutevol } },
+  { 0,                            XF86XK_AudioRaiseVolume,    spawn,  {.v = upvol   } },
+  { 0,                            XF86XK_MonBrightnessUp,     spawn,  {.v = light_up} },
+  { 0,                            XF86XK_MonBrightnessDown,   spawn,  {.v = light_down} },
 	TAGKEYS(                        XK_1,                               0)
 	TAGKEYS(                        XK_2,                               1)
 	TAGKEYS(                        XK_3,                               2)
