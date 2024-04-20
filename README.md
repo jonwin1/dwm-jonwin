@@ -1,19 +1,41 @@
-# dwm-jonwin
+# DWM Jonwin
 
-My dwm configuration.
+My dwm configuration with flake.
 
-dwm - dynamic window manager
-============================
 dwm is an extremely fast, small, and dynamic window manager for X.
 
+<img src="img.png" alt="dwm image">
 
-Requirements
-------------
+## NixOS Install
+
+Add this repo as a flake input in your flake.nix:
+
+    inputs = {
+        dwm = {
+            url = "github:jonwin1/dwm-jonwin";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+    };
+
+Then add the following to your configuration.nix to enable dwm:
+
+    services = {
+        xserver = {
+            windowManager.dwm = {
+                enable = true;
+                package = inputs.dwm.packages."x86_64-linux".default;
+            };
+        };
+    };
+
+## Regular Install
+
+### Requirements
+
 In order to build dwm you need the Xlib header files.
 
+### Installation
 
-Installation
-------------
 Edit config.mk to match your local setup (dwm is installed into
 the /usr/local namespace by default).
 
@@ -22,9 +44,8 @@ necessary as root):
 
     make clean install
 
+### Running dwm
 
-Running dwm
------------
 Add the following line to your .xinitrc to start dwm using startx:
 
     exec dwm
@@ -44,10 +65,4 @@ like this in your .xinitrc:
     	sleep 1
     done &
     exec dwm
-
-
-Configuration
--------------
-The configuration of dwm is done by creating a custom config.h
-and (re)compiling the source code.
 
