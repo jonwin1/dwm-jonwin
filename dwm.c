@@ -237,8 +237,6 @@ static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
-//static void tile(Montitor *m);
-//static void tilewide(Monitor *m);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglescratch(const Arg *arg);
@@ -1931,90 +1929,6 @@ tagmon(const Arg *arg)
 		return;
 	sendmon(selmon->sel, dirtomon(arg->i));
 }
-
-/*void
-tile(Monitor *m)
-{
-	unsigned int i, n, h, r, oe = enablegaps, ie = enablegaps, mw, my, ty;
-	Client *c;
-
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if (n == 0)
-		return;
-
-  if (smartgaps == n) {
-    oe = 0; // outer gaps disabled
-    enableoutergaps = 0;
-  } else enableoutergaps = 1;
-
-	if (n > m->nmaster)
-		mw = m->nmaster ? (m->ww + m->gappiv*ie) * m->mfact : 0;
-	else
-    mw = m->ww - 2*m->gappov*oe + m->gappiv*ie;
-	for (i = 0, my = ty = m->gappoh*oe, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-		if (i < m->nmaster) {
-      r = MIN(n, m->nmaster) - i;
-			h = (m->wh - my - m->gappoh*oe - m->gappih*ie * (r-1)) / r;
-			resize(c, m->wx + m->gappov*oe, m->wy + my, mw - (2*c->bw) - m->gappiv*ie, h - (2*c->bw), 0);
-			if (my + HEIGHT(c) < m->wh)
-				my += HEIGHT(c) + m->gappih*ie;
-		} else {
-			r = n - i;
-			h = (m->wh - ty - m->gappoh*oe - m->gappih*ie * (r-1)) / r;
-			resize(c, m->wx + mw + m->gappov*oe, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappov*oe, h - (2*c->bw), 0);
-			if (ty + HEIGHT(c) < m->wh)
-				ty += HEIGHT(c) + m->gappih*ie;
-		}
-
-    if (n == 1 && selmon->sel->CenterThisWindow)
-      resizeclient(selmon->sel,
-        (selmon->mw - selmon->mw * 0.5) / 2,
-        (selmon->mh - selmon->mh * 0.95) / 2,
-        selmon->mw * 0.5,
-        selmon->mh * 0.95);
-}*/
-
-/*void
-tilewide(Monitor *m)
-{
-  unsigned int i, n, w, h, r, oe = enablegaps, ie = enablegaps, mw, mx, ty;
-	Client *c;
-
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if (n == 0)
-		return;
-
-  if (smartgaps == n) {
-    oe = 0; // outer gaps disabled
-    enableoutergaps = 0;
-  } else enableoutergaps = 1;
-
-	if (n > m->nmaster)
-		mw = m->nmaster ? (m->ww + m->gappiv*ie) * m->mfact : 0;
-	else
-		mw = m->ww - 2*m->gappov*oe + m->gappiv*ie;
-	for (i = 0, mx = m->gappov*oe, ty = m->gappoh*oe, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-		if (i < m->nmaster) {
-      r = MIN(n, m->nmaster) - i;
-      w = (mw - mx - m->gappov*oe - m->gappiv*ie * (r-1)) / r;
-      resize(c, m->wx + mx, m->wy + m->gappoh*oe, w - (2*c->bw), (m->wh - ty) - (2*c->bw) - m->gappih*ie, 0);
-      if  (mx + WIDTH(c) < m->ww)
-        mx += WIDTH(c) + m->gappiv*ie;
-		} else {
-      r = n - i;
-			h = (m->wh - ty - m->gappoh*oe - m->gappih*ie * (r-1)) / r;
-			resize(c, m->wx + mw + m->gappov*oe, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappov*oe, h - (2*c->bw), 0);
-			if (ty + HEIGHT(c) < m->wh)
-				ty += HEIGHT(c) + m->gappih*ie;
-		}
-
-    if (n == 1 && selmon->sel->CenterThisWindow)
-      resizeclient(selmon->sel,
-        (selmon->mw - selmon->mw * 0.5) / 2,
-        (selmon->mh - selmon->mh * 0.95) / 2,
-        selmon->mw * 0.5,
-        selmon->mh * 0.95);
-}*/
 
 void
 togglebar(const Arg *arg)
