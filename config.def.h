@@ -47,7 +47,6 @@ static const int lockfullscreen = 1;        /* 1 will force focus on the fullscr
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[][]=",    tilewide },
-	{ "|M|",      centeredmaster },
 	{ "[]=",      tile },
 	{ "><>",      NULL },
 	{ "[M]",      monocle },
@@ -85,8 +84,8 @@ static const Key keys[] = {
   /* modifier                     key         function                argument */
 	{ MODKEY,                       XK_b,       togglebar,              {0} },
 	{ MODKEY,                       XK_d,       incnmaster,             {.i = -1 } },
-  { MODKEY,                       XK_f,       spawn,                  SHCMD ("firefox") },
-  { MODKEY|ShiftMask,             XK_g,       togglegaps,             {0} },
+    { MODKEY,                       XK_f,       spawn,                  SHCMD ("firefox") },
+    { MODKEY|ShiftMask,             XK_g,       togglegaps,             {0} },
 	{ MODKEY,                       XK_h,       setmfact,               {.f = -0.05} },
 	{ MODKEY,                       XK_i,       incnmaster,             {.i = +1 } },
 	{ MODKEY,                       XK_j,       focusstack,             {.i = +1 } },
@@ -111,11 +110,11 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period,  tagmon,                 {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_comma,   cyclelayout,            {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period,  cyclelayout,            {.i = +1 } },
-  { 0,                            XF86XK_AudioLowerVolume,    spawn,  {.v = downvol } },
-  { 0,                            XF86XK_AudioMute,           spawn,  {.v = mutevol } },
-  { 0,                            XF86XK_AudioRaiseVolume,    spawn,  {.v = upvol   } },
-  { 0,                            XF86XK_MonBrightnessUp,     spawn,  {.v = light_up} },
-  { 0,                            XF86XK_MonBrightnessDown,   spawn,  {.v = light_down} },
+    { 0,                            XF86XK_AudioLowerVolume,    spawn,  {.v = downvol } },
+    { 0,                            XF86XK_AudioMute,           spawn,  {.v = mutevol } },
+    { 0,                            XF86XK_AudioRaiseVolume,    spawn,  {.v = upvol   } },
+    { 0,                            XF86XK_MonBrightnessUp,     spawn,  {.v = light_up} },
+    { 0,                            XF86XK_MonBrightnessDown,   spawn,  {.v = light_down} },
 	TAGKEYS(                        XK_1,                               0)
 	TAGKEYS(                        XK_2,                               1)
 	TAGKEYS(                        XK_3,                               2)
