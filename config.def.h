@@ -64,7 +64,6 @@ static const Layout layouts[] = {
 	//{ "[M]",      monocle },
     { "[]=",      flextile },
 	{ "><>",      NULL },
-	{ NULL,       NULL },
 };
 
 /* key definitions */
@@ -141,8 +140,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period,  focusmon,               {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,   tagmon,                 {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period,  tagmon,                 {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_comma,   cyclelayout,            {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_period,  cyclelayout,            {.i = +1 } },
     { 0,                            XF86XK_AudioLowerVolume,    spawn,  {.v = downvol } },
     { 0,                            XF86XK_AudioMute,           spawn,  {.v = mutevol } },
     { 0,                            XF86XK_AudioRaiseVolume,    spawn,  {.v = upvol   } },
