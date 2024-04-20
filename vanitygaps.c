@@ -366,6 +366,13 @@ flextile(Monitor *m) {
 			}
 		}
 	}
+
+    if (n == 1 && selmon->sel->CenterThisWindow)
+        resizeclient(selmon->sel,
+                     m->wx + oh + (selmon->mw - selmon->mw * 0.5) / 2,
+                     m->wy + ov + (selmon->mh - selmon->mh * 1) / 2,
+                     selmon->mw * 0.5 - m->wx - 2*oh,
+                     selmon->mh * 1 - m->wy - 2*ov);
 }
 
 static void
