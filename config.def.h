@@ -1,13 +1,18 @@
 /* See LICENSE file for copyright and license details. */
 
+#include "exitdwm.c"
+#include "movestack.c"
+#include "vanitygaps.h"
+#include <X11/XF86keysym.h>
+
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int cornerrad = 10;
-static const unsigned int gappih    = 10;
+static const unsigned int gappih    = 20;
 static const unsigned int gappiv    = 10;
 static const unsigned int gappoh    = 10;
-static const unsigned int gappov    = 10;
+static const unsigned int gappov    = 30;
 static const int smartgaps          = 0;
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -44,12 +49,20 @@ static const int nmaster        = 2;        /* number of clients in master area 
 static const int resizehints    = 0;        /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1;        /* 1 will force focus on the fullscreen window */
 
+
+static const int layoutaxis[] = {
+    SPLIT_VERTICAL,   /* layout axis: 1 = x, 2 = y; negative values mirror the layout */
+    LEFT_TO_RIGHT,    /* master axis: 1 = x (from left to right), 2 = y (from top to bottom), 3 = z (monocle) */
+    TOP_TO_BOTTOM,    /* stack axis:  1 = x (from left to right), 2 = y (from top to bottom), 3 = z (monocle) */
+};
+
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[][]=",    tilewide },
-	{ "[]=",      tile },
+    //{ "[][]=",    tilewide },
+    //{ "[]=",      tile },
+	//{ "[M]",      monocle },
+    { "[]=",      flextile },
 	{ "><>",      NULL },
-	{ "[M]",      monocle },
 	{ NULL,       NULL },
 };
 
@@ -71,15 +84,25 @@ static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
-#include <X11/XF86keysym.h>
 static const char *upvol[]      = { "/run/current-system/sw/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%+",	  "--limit", "1", NULL };
 static const char *downvol[]    = { "/run/current-system/sw/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%-",	  NULL };
 static const char *mutevol[]    = { "/run/current-system/sw/bin/wpctl",	"set-mute",	"@DEFAULT_AUDIO_SINK@",	"toggle", NULL };
 static const char *light_up[]   = { "/run/current-system/sw/bin/light",   "-A", "5", NULL };
 static const char *light_down[] = { "/run/current-system/sw/bin/light",   "-U", "5", NULL };
 
-#include "exitdwm.c"
-#include "movestack.c"
+/*
+ * Bitwise layout:
+ *
+ *    0000          (nmaster: 0-15 = clients in master stack)
+ *        0         (reserved)
+ *         0        (orientation: 0 = normal, 1 = mirror)
+ *          00      (layout: 00 = vertical, 01 = horizontal, 10 = centered (vert), 11 = centered (horz))
+ *            00    (master axis: 00 = left to right, 01 = top to bottom, 10 = monocle, 11 = grid)
+ *              00  (stack axis:  00 = left to right, 01 = top to bottom, 10 = monocle, 11 = grid)
+ *    000100000101  (tile)
+ *    001000000001  (tilewide)
+ */
+
 static const Key keys[] = {
   /* modifier                     key         function                argument */
 	{ MODKEY,                       XK_b,       togglebar,              {0} },
@@ -87,19 +110,44 @@ static const Key keys[] = {
     { MODKEY,                       XK_f,       spawn,                  SHCMD ("firefox") },
     { MODKEY|ShiftMask,             XK_g,       togglegaps,             {0} },
 	{ MODKEY,                       XK_h,       setmfact,               {.f = -0.05} },
+    { MODKEY|ShiftMask,             XK_h,       setcfact,               {.f = +0.25} },
 	{ MODKEY,                       XK_i,       incnmaster,             {.i = +1 } },
+    { MODKEY|ControlMask,           XK_i,       incrigaps,              {.i = +1 } },
+	{ MODKEY|ControlMask|ShiftMask, XK_i,       incrigaps,              {.i = -1 } },
 	{ MODKEY,                       XK_j,       focusstack,             {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_j,       movestack,              {.i = +1 } },
 	{ MODKEY,                       XK_k,       focusstack,             {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_k,       movestack,              {.i = -1 } },
 	{ MODKEY,                       XK_l,       setmfact,               {.f = +0.05} },
+    { MODKEY|ShiftMask,             XK_l,       setcfact,               {.f = -0.25} },
+    { MODKEY|ShiftMask,             XK_o,       setcfact,               {.f =  0.00} },
+    { MODKEY|ControlMask,           XK_o,       incrogaps,              {.i = +1 } },
+	{ MODKEY|ControlMask|ShiftMask, XK_o,       incrogaps,              {.i = -1 } },
 	{ MODKEY,                       XK_p,       spawn,                  {.v = dmenucmd } },
 	{ MODKEY,                       XK_q,       killclient,             {0} },
 	{ MODKEY|ShiftMask,             XK_q,       exitdwm,                {0} },
 	{ MODKEY,                       XK_s,       togglescratch,          {.v = scratchpadcmd } },
+    { MODKEY,                       XK_t,       setflexlayout,          {.i = 261 } },
+    { MODKEY|ShiftMask,             XK_t,       setflexlayout,          {.i = 513 } },
+    { MODKEY|ControlMask,           XK_t,       rotatelayoutaxis,       {.i = 0} },    /* flextile, 0 = layout axis */
+    { MODKEY|ControlMask,           XK_u,       incrgaps,               {.i = +1 } },
+	{ MODKEY|ControlMask|ShiftMask, XK_u,       incrgaps,               {.i = -1 } },
+    { MODKEY|ControlMask,           XK_6,       incrihgaps,             {.i = +1 } },
+	{ MODKEY|ControlMask|ShiftMask, XK_6,       incrihgaps,             {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_7,       incrivgaps,             {.i = +1 } },
+	{ MODKEY|ControlMask|ShiftMask, XK_7,       incrivgaps,             {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_8,       incrohgaps,             {.i = +1 } },
+	{ MODKEY|ControlMask|ShiftMask, XK_8,       incrohgaps,             {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_9,       incrovgaps,             {.i = +1 } },
+	{ MODKEY|ControlMask|ShiftMask, XK_9,       incrovgaps,             {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_0,       togglegaps,             {0} },
+	{ MODKEY|ControlMask|ShiftMask, XK_0,       defaultgaps,            {0} },
 	{ MODKEY,                       XK_Return,  zoom,                   {0} },
 	{ MODKEY|ShiftMask,             XK_Return,  spawn,                  {.v = termcmd } },
+	{ MODKEY|ControlMask,           XK_Return,  mirrorlayout,           {0} },         /* flextile, flip master and stack areas */
 	{ MODKEY,                       XK_Tab,     view,                   {0} },
+	{ MODKEY|ControlMask,           XK_Tab,     rotatelayoutaxis,       {.i = 1} },    /* flextile, 1 = master axis */
+	{ MODKEY|ControlMask|ShiftMask, XK_Tab,     rotatelayoutaxis,       {.i = 2} },    /* flextile, 2 = stack axis */
 	{ MODKEY,                       XK_space,   setlayout,              {0} },
 	{ MODKEY|ShiftMask,             XK_space,   togglefloating,         {0} },
 	{ MODKEY,                       XK_0,       view,                   {.ui = ~0 } },
