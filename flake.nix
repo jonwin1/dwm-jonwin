@@ -22,11 +22,5 @@
       };
     in {
       packages.default = pkgs.dwm;
-
-      devShells.default = pkgs.mkShell {
-        name = "dwm";
-        packages = with pkgs; [
-        ];
-      };
     });
 }

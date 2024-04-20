@@ -88,7 +88,7 @@ static const char *light_up[]   = { "/run/current-system/sw/bin/light",   "-A", 
 static const char *light_down[] = { "/run/current-system/sw/bin/light",   "-U", "5", NULL };
 
 /*
- * Bitwise layout:
+ * Bitwise layout for setflexlayout:
  *
  *    0000          (nmaster: 0-15 = clients in master stack)
  *        0         (reserved)
@@ -96,6 +96,7 @@ static const char *light_down[] = { "/run/current-system/sw/bin/light",   "-U", 
  *          00      (layout: 00 = vertical, 01 = horizontal, 10 = centered (vert), 11 = centered (horz))
  *            00    (master axis: 00 = left to right, 01 = top to bottom, 10 = monocle, 11 = grid)
  *              00  (stack axis:  00 = left to right, 01 = top to bottom, 10 = monocle, 11 = grid)
+ * Examples:
  *    000100000101  (tile)
  *    001000000001  (tilewide)
  */

@@ -6,6 +6,18 @@ dwm is an extremely fast, small, and dynamic window manager for X.
 
 <img src="img.png" alt="dwm image">
 
+## Table of contents
+
+- [NixOS install](#nixos-install)
+- [Regular Install](#regulat-install)
+    - [Requirements](#requirements)
+    - [Installation](#installation)
+    - [Running dwm](#running-dwm)
+- [Installed patches](#installed-patches)
+- [Notes](#notes)
+
+---
+
 ## NixOS Install
 
 Add this repo as a flake input in your flake.nix:
@@ -65,4 +77,32 @@ like this in your .xinitrc:
     	sleep 1
     done &
     exec dwm
+
+## Installed patches
+
+- **[alpha](https://dwm.suckless.org/patches/alpha/):** Translucent bar.
+- **[alwayscenter](https://dwm.suckless.org/patches/alwayscenter/):** All floating windows are centered.
+- **[attachbottom](https://dwm.suckless.org/patches/attachbottom/):** New clients attach at the bottom of the stack instead of the top.
+- **[center first window](https://dwm.suckless.org/patches/center_first_window/):** Center window if only one window is open.
+- **[exitmenu](https://dwm.suckless.org/patches/exitmenu/):** Simple exit menu for dwm.
+- **[fancybar](https://dwm.suckless.org/patches/fancybar/):** Show title of all visible windows.
+- **[flextile...](https://github.com/bakkeby/dwm-vanitygaps/blob/master/patches/dwm-flextile-pertag-cfacts-vanitygaps-grid-centered-6.2.diff):** Patch containing custom versions of the following patches:
+    - **flextile:** A flexible layout.
+    - **pertag:** Layout and etc on a per tag basis.
+    - **cfacts:** Provides the ability to assign different weights to clients.
+    - **vanitygaps:** Flexible gaps between client windows and between windows and the screen edge.
+    - **grid:** Place clients in a grid.
+- **[hide vacant tags](https://dwm.suckless.org/patches/hide_vacant_tags/):** Hide tags with no clients from bar.
+- **[movestack](https://dwm.suckless.org/patches/movestack/):** Move clients around in the stack.
+- **[restartsig](https://dwm.suckless.org/patches/restartsig/):** Allows restarting of dwm.
+- **[scratchpad](https://dwm.suckless.org/patches/scratchpad/):** Spawn or restore a floating terminal window.
+- **[swallow](https://dwm.suckless.org/patches/swallow/):** Terminals swallow windows opened by child processes.
+- **[viewontag](https://dwm.suckless.org/patches/viewontag/):** Follow a window to the tag it is being moved to.
+
+## Notes
+
+Customize [config.def.h](./config.def.h) to fit your system and needs.
+
+You may need to change the path to wpctl and light to get the volume and brightness
+keys to work on non NixOS systems.
 
