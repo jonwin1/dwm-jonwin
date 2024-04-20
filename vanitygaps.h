@@ -1,18 +1,9 @@
 /* Key binding functions */
-static void defaultgaps(const Arg *arg);
-static void incrgaps(const Arg *arg);
-static void incrigaps(const Arg *arg);
-static void incrogaps(const Arg *arg);
-static void incrohgaps(const Arg *arg);
-static void incrovgaps(const Arg *arg);
-static void incrihgaps(const Arg *arg);
-static void incrivgaps(const Arg *arg);
 static void togglegaps(const Arg *arg);
 /* Layouts */
 static void flextile(Monitor *m);
 /* Internals */
 static void getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc, float *mf, float *sf);
-static void setgaps(int oh, int ov, int ih, int iv);
 static void setcfact(const Arg *arg);
 static void setflexsymbols(Monitor *m, unsigned int n);
 static void setflexlayout(const Arg *arg);
