@@ -103,7 +103,8 @@ static const char *light_down[] = { "/run/current-system/sw/bin/light",   "-U", 
 
 static const Key keys[] = {
   /* modifier                     key         function                argument */
-  { MODKEY,                       XK_b,       togglebar,              {0} },
+  { MODKEY,                       XK_b,       spawn,                  SHCMD ("bwm") },
+  { MODKEY|ShiftMask,             XK_b,       togglebar,              {0} },
   { MODKEY,                       XK_d,       incnmaster,             {.i = -1 } },
   { MODKEY,                       XK_f,       spawn,                  SHCMD ("firefox") },
   { MODKEY|ShiftMask,             XK_g,       togglegaps,             {0} },
@@ -124,8 +125,8 @@ static const Key keys[] = {
   { MODKEY,                       XK_t,       setflexlayout,          {.i = 261 } },
   { MODKEY|ShiftMask,             XK_t,       setflexlayout,          {.i = 513 } },
   { MODKEY|ControlMask,           XK_t,       rotatelayoutaxis,       {.i = 0} },    /* flextile, 0 = layout axis */
-  { MODKEY,                       XK_Return,  zoom,                   {0} },
-  { MODKEY|ShiftMask,             XK_Return,  spawn,                  {.v = termcmd } },
+  { MODKEY,                       XK_Return,  spawn,                  {.v = termcmd } },
+  { MODKEY|ShiftMask,             XK_Return,  zoom,                   {0} },
   { MODKEY|ControlMask,           XK_Return,  mirrorlayout,           {0} },         /* flextile, flip master and stack areas */
   { MODKEY,                       XK_Tab,     view,                   {0} },
   { MODKEY|ControlMask,           XK_Tab,     rotatelayoutaxis,       {.i = 1} },    /* flextile, 1 = master axis */
