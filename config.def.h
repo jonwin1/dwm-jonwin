@@ -84,6 +84,11 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 static const char *upvol[]      = { "/run/current-system/sw/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%+",	  "--limit", "1", NULL };
 static const char *downvol[]    = { "/run/current-system/sw/bin/wpctl",	"set-volume",	"@DEFAULT_AUDIO_SINK@",	"5%-",	  NULL };
 static const char *mutevol[]    = { "/run/current-system/sw/bin/wpctl",	"set-mute",	"@DEFAULT_AUDIO_SINK@",	"toggle", NULL };
+static const char *prev[]       = { "/run/current-system/sw/bin/playerctl", "previous", NULL };
+static const char *next[]       = { "/run/current-system/sw/bin/playerctl", "next", NULL };
+static const char *pause[]      = { "/run/current-system/sw/bin/playerctl", "pause", NULL };
+static const char *play[]       = { "/run/current-system/sw/bin/playerctl", "play", NULL };
+static const char *stop[]       = { "/run/current-system/sw/bin/playerctl", "stop", NULL };
 static const char *light_up[]   = { "/run/current-system/sw/bin/light",   "-A", "5", NULL };
 static const char *light_down[] = { "/run/current-system/sw/bin/light",   "-U", "5", NULL };
 
@@ -144,6 +149,11 @@ static const Key keys[] = {
   { 0,                            XF86XK_AudioRaiseVolume,    spawn,  {.v = upvol   } },
   { 0,                            XF86XK_MonBrightnessUp,     spawn,  {.v = light_up} },
   { 0,                            XF86XK_MonBrightnessDown,   spawn,  {.v = light_down} },
+  { 0,                            XF86XK_AudioPrev,		        spawn,	{.v = prev} },
+  { 0,                            XF86XK_AudioNext,		        spawn,	{.v = next} },
+  { 0,                            XF86XK_AudioPause,		      spawn,	{.v = pause} },
+  { 0,                            XF86XK_AudioPlay,		        spawn,	{.v = play} },
+  { 0,                            XF86XK_AudioStop,		        spawn,	{.v = stop} },
   TAGKEYS(                        XK_1,                               0)
   TAGKEYS(                        XK_2,                               1)
   TAGKEYS(                        XK_3,                               2)
