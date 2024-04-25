@@ -111,7 +111,7 @@ static const Key keys[] = {
   { MODKEY,                       XK_b,       spawn,                  SHCMD ("bwm") },
   { MODKEY|ShiftMask,             XK_b,       togglebar,              {0} },
   { MODKEY,                       XK_d,       incnmaster,             {.i = -1 } },
-  { MODKEY,                       XK_f,       spawn,                  SHCMD ("firefox") },
+  { MODKEY,                       XK_f,       spawn,                  SHCMD ("qutebrowser") },
   { MODKEY|ShiftMask,             XK_g,       togglegaps,             {0} },
   { MODKEY,                       XK_h,       setmfact,               {.f = -0.05} },
   { MODKEY|ShiftMask,             XK_h,       setcfact,               {.f = +0.25} },
