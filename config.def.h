@@ -6,13 +6,13 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int cornerrad = 10;
-static const unsigned int gappih    = 20;
-static const unsigned int gappiv    = 20;
-static const unsigned int gappoh    = 20;
-static const unsigned int gappov    = 20;
+static const unsigned int cornerrad = 0;
+static const unsigned int gappih    = 0;
+static const unsigned int gappiv    = 0;
+static const unsigned int gappoh    = 0;
+static const unsigned int gappov    = 0;
 static const int centerfirst        = 1;
 static const int smartgaps          = 0;
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
@@ -27,8 +27,8 @@ static const char *colors[][3] = {
 };
 static const unsigned int alphas[][3]      = {
   /*               fg      bg    border*/
-  [SchemeNorm] = { OPAQUE, 0x80, OPAQUE },
-  [SchemeSel]  = { OPAQUE, 0x80, OPAQUE },
+  [SchemeNorm] = { OPAQUE, OPAQUE, OPAQUE },
+  [SchemeSel]  = { OPAQUE, OPAQUE, OPAQUE },
 };
 
 /* tagging */
