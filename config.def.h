@@ -22,7 +22,7 @@ static const Bool viewontag         = True;     /* Switch view on tag switch */
 static const char *fonts[]          = { "FiraCode Nerd Font:size=12" };
 static const char *colors[][3] = {
   /*               fg         bg         border   */
-  [SchemeNorm] = { "#d8dee9", "#2e3440", "#2e3440" },
+  [SchemeNorm] = { "#d8dee9", "#2e3440", "#4c566a" },
   [SchemeSel]  = { "#eceff4", "#4c566a", "#88c0d0" },
 };
 static const unsigned int alphas[][3]      = {
