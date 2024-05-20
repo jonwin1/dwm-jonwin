@@ -6,8 +6,8 @@
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, utils, ... }@inputs:
-    utils.lib.eachSystem ["x86_64-linux"] (system: let
+  outputs = { nixpkgs, utils, ... }@inputs:
+    utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {
         inherit system;
 
@@ -15,7 +15,9 @@
           (final: prev: {
             dwm = prev.dwm.overrideAttrs (old: {
               src = ./.;
-              buildInputs = with prev; old.buildInputs ++ [xorg.libXext];
+              buildInputs = with prev; old.buildInputs ++ [
+                xorg.libXext
+              ];
             });
           })
         ];
