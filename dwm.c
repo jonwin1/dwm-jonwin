@@ -1911,8 +1911,8 @@ tile(Monitor *m)
         resizeclient(selmon->sel,
                 m->wx + (selmon->mw - selmon->mw * 0.5) / 2,
                 m->wy + (selmon->mh - selmon->mh * 1) / 2,
-                selmon->mw * 0.5 - m->wx * 2,
-                selmon->mh * 0.99 - m->wy * 2);
+                selmon->mw * 0.5 - m->wx,
+                selmon->mh * 1 - m->wy - 4);
 }
 
 void
@@ -1941,6 +1941,13 @@ tilewide(Monitor *m)
 			if (ty + HEIGHT(c) < m->wh)
 				ty += HEIGHT(c);
 		}
+
+	if (n == 1 && selmon->sel->CenterThisWindow)
+        resizeclient(selmon->sel,
+                m->wx + (selmon->mw - selmon->mw * 0.5) / 2,
+                m->wy + (selmon->mh - selmon->mh * 1) / 2,
+                selmon->mw * 0.5 - m->wx,
+                selmon->mh * 1 - m->wy - 4);
 }
 
 void
