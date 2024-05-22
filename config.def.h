@@ -82,9 +82,9 @@ static const char *light_down[] = { "/run/current-system/sw/bin/light",   "-U", 
 static const Key keys[] = {
 	/* modifier                     key         function        argument */
   // applications
-	{ MODKEY,                       XK_p,       spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return,  spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_s,       togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY,                       XK_d,       spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_s,       spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_p,       togglescratch,  {.v = scratchpadcmd } },
   { MODKEY,                       XK_b,       spawn,          SHCMD ("bwm") },
   { MODKEY,                       XK_w,       spawn,          SHCMD ("qutebrowser") },
 
