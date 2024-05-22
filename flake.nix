@@ -16,7 +16,7 @@
             dwm = prev.dwm.overrideAttrs (old: {
               src = ./.;
               buildInputs = with prev; old.buildInputs ++ [
-                
+                fira-code-nerdfont
               ];
             });
           })
