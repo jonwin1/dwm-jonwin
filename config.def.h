@@ -111,6 +111,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_m,       setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_space,   setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_b,       togglebar,      {0} },
+  { MODKEY|ShiftMask|ControlMask, XK_b,       toggleborder,   {0} },
 
   // tags and monitors
 	{ MODKEY,                       XK_Tab,     view,           {0} },
