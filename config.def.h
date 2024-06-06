@@ -14,10 +14,10 @@ static const Bool viewontag         = True;     /* Switch view on tag switch */
 static const int splitstatus        = 1;        /* 1 for split status items */
 static const char *splitdelim        = ";";       /* Character used for separating status */
 static const char *fonts[]          = { "FiraCode Nerd Font:size=12" };
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-  [SchemeNorm] = { "#d8dee9", "#2e3440", "#4c566a" },
-  [SchemeSel]  = { "#eceff4", "#4c566a", "#88c0d0" },
+static const char *colors[][4]      = {
+	/*               fg         bg         border     float */
+  [SchemeNorm] = { "#d8dee9", "#2e3440", "#4c566a", "#ebcb8b" },
+  [SchemeSel]  = { "#eceff4", "#4c566a", "#88c0d0", "#d08770" },
 };
 
 /* tagging */
